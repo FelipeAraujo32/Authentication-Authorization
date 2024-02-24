@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-SecuritytokenApplication<securitytoken>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.br.securitytoken.securitytoken.SecuritytokenApplication",
+            "projectName": "securitytoken",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

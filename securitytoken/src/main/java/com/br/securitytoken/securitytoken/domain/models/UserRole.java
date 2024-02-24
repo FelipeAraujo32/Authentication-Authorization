@@ -1,7 +1,7 @@
-package com.br.securitytoken.securitytoken.models;
+package com.br.securitytoken.securitytoken.domain.models;
 
 public enum UserRole {
-
+    
     ADMIN("admin"),
     USER("user");
 
@@ -11,7 +11,8 @@ public enum UserRole {
         this.role = role;
     }
 
-    public String getRole(){
+    public String getRole() {
         return role;
     }
+
 }

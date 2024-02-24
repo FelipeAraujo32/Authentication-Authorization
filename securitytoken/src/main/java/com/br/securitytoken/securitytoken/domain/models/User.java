@@ -1,10 +1,9 @@
-package com.br.securitytoken.securitytoken.models;
+package com.br.securitytoken.securitytoken.domain.models;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.UUID;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
@@ -14,21 +13,20 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Table(name = "users")
+@Table(name = "tb_users")
 @Entity(name = "user")
 public class User implements UserDetails{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID userID;
+    @Column(nullable = false, unique = true)
     private String login;
     @Column(nullable = false)
     private String password;
     private UserRole role;
 
-    public User(Long id, String login, String password, UserRole role) {
-        this.id = id;
+    public User(String login, String password, UserRole role) {
         this.login = login;
         this.password = password;
         this.role = role;
@@ -36,13 +34,12 @@ public class User implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-       if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-       else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        return null;
     }
 
     @Override
     public String getUsername() {
-        return login;
+        return this.login;
     }
 
     @Override
@@ -67,30 +64,29 @@ public class User implements UserDetails{
 
     public User() {
     }
-    
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
+
     public String getLogin() {
         return login;
     }
+
     public void setLogin(String login) {
         this.login = login;
     }
+
     public String getPassword() {
         return password;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
+
     public UserRole getRole() {
         return role;
     }
+
     public void setRole(UserRole role) {
         this.role = role;
     }
-
+    
 }
