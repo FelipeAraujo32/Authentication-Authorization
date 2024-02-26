@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.br.securitytoken.securitytoken.api.dto.LoginRequest;
+import com.br.securitytoken.securitytoken.domain.models.User;
+import com.br.securitytoken.securitytoken.domain.services.TokenService;
 
 @RestController
 @RequestMapping("/login")
@@ -20,13 +22,19 @@ public class LoginController {
     
     @Autowired
     private AuthenticationManager authenticationManager;
+    @Autowired
+    private TokenService tokenService;
 
-
-    @PostMapping("user")
+    @PostMapping
     public ResponseEntity login(@RequestBody @Valid LoginRequest loginRequest){
+    
         var usernamePassword = new UsernamePasswordAuthenticationToken(loginRequest.getLogin(), loginRequest.getPassword());
-        var authenticated = this.authenticationManager.authenticate(usernamePassword);
-        return ResponseEntity.ok().build();
+        var authenticate = this.authenticationManager.authenticate(usernamePassword);
+        System.out.println(authenticate);
+        //Gerando o token para o usuario
+        var token = tokenService.generateToken((User) authenticate.getPrincipal());
+
+        return ResponseEntity.ok(token);
     }
 
 }

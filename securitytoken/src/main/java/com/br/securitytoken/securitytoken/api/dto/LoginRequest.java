@@ -8,8 +8,7 @@ public class LoginRequest {
     private String login;
     @NotNull
     private String password;
-    
-    
+
     public String getLogin() {
         return login;
     }

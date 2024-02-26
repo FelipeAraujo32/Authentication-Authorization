@@ -23,14 +23,14 @@ public class RegisterController{
     private UserRepository userRepository;
     
     
-    @PostMapping("/user")
+    @PostMapping
     public ResponseEntity register(@RequestBody @Valid RegisterRequest registerRequest){
 
     //Verifica se tm algum user dentro do DB.
     if(this.userRepository.findByLogin(registerRequest.getLogin())!= null) return ResponseEntity.badRequest().build();
 
     String encrytedPassword = new BCryptPasswordEncoder().encode(registerRequest.getPassword());//Codifica a senha
-    User newUser = new User(registerRequest.getLogin(), encrytedPassword, UserRole.ADMIN);
+    User newUser = new User(registerRequest.getLogin(), encrytedPassword, UserRole.USER);
 
     this.userRepository.save(newUser);
     return ResponseEntity.ok().build();
