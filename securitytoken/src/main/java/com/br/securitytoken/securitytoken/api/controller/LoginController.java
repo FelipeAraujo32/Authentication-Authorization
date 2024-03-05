@@ -1,6 +1,5 @@
 package com.br.securitytoken.securitytoken.api.controller;
 
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,19 +18,18 @@ import com.br.securitytoken.securitytoken.domain.services.TokenService;
 @RestController
 @RequestMapping("/login")
 public class LoginController {
-    
+
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
     private TokenService tokenService;
 
     @PostMapping
-    public ResponseEntity login(@RequestBody @Valid LoginRequest loginRequest){
-    
-        var usernamePassword = new UsernamePasswordAuthenticationToken(loginRequest.getLogin(), loginRequest.getPassword());
+    public ResponseEntity login(@RequestBody @Valid LoginRequest loginRequest) {
+        var usernamePassword = new UsernamePasswordAuthenticationToken(loginRequest.getLogin(),
+                loginRequest.getPassword());
         var authenticate = this.authenticationManager.authenticate(usernamePassword);
-        System.out.println(authenticate);
-        //Gerando o token para o usuario
+        // Gerando o token para o usuario
         var token = tokenService.generateToken((User) authenticate.getPrincipal());
 
         return ResponseEntity.ok(token);
