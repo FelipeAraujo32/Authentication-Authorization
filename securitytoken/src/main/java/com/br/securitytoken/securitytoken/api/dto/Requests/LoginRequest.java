@@ -1,4 +1,4 @@
-package com.br.securitytoken.securitytoken.api.dto;
+package com.br.securitytoken.securitytoken.api.dto.Requests;
 
 
 

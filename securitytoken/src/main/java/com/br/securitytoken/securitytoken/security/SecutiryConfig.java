@@ -31,6 +31,7 @@ public class SecutiryConfig {
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers(HttpMethod.POST, "/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/register").permitAll()
+                .requestMatchers(HttpMethod.POST, "/register/admin").hasRole("ADMIN")
                 .anyRequest().authenticated()
             ) 
             .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
@@ -48,6 +49,5 @@ public class SecutiryConfig {
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-    
     
 }
