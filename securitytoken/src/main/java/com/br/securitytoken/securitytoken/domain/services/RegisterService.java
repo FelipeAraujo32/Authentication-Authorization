@@ -22,12 +22,12 @@ public class RegisterService {
 
         // Verifica se tem algum Login existente dentro do DB.
         if (this.userRepository.findByLogin(registerRequest.getLogin()) != null) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body("Esse login já existe");
         }
 
         Optional<User> optionalNumberPhone = userRepository.findByNumberPhone(registerRequest.getNumberPhone());
         if (optionalNumberPhone.isPresent()) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body("Esse número já existe");
         }
 
         String encrytedPassword = new BCryptPasswordEncoder().encode(registerRequest.getPassword());// Codifica a senha
@@ -52,8 +52,9 @@ public class RegisterService {
         }
 
         String encrytedPassword = new BCryptPasswordEncoder().encode(registerRequest.getPassword());// Codifica a senha
+        
         User newUser = new User(registerRequest.getName(), registerRequest.getLastname(),
-                registerRequest.getNumberPhone(), registerRequest.getLogin(), encrytedPassword, UserRole.ADMIN);
+                registerRequest.getNumberPhone(), registerRequest.getLogin(), encrytedPassword, UserRole.USER);
         System.out.println(newUser);
         this.userRepository.save(newUser);
         return ResponseEntity.ok().build();
