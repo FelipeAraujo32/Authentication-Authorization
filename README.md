@@ -15,14 +15,14 @@ Este projeto é um exemplo de um sistema de autenticação desenvolvido em Java 
 - `Customização de Permissões:` O sistema oferece a capacidade de atribuir diferentes níveis de permissões aos usuários, permitindo o acesso controlado a diferentes partes da aplicação com base em seus papéis e autorizações.
 
 ## Pré-requisitos
-- Java JDK 8 ou superior
+- Java JDK 17 
 - Maven
 
 ## 🛠️ Instalação e Configuração
 1. Clone este repositório:
-   ``` git clone https://github.com/seu-usuario/seu-projeto.git ```
+   ``` git clone https://github.com/FelipeAraujo32/Authentication-Authorization.git ```
 2. Navegue até o diretório do projeto:
-   ``` cd seu-projeto ```
+   ``` cd Authentication-Authorization ```
 3. Construa o projeto utilizando o Maven:
    ``` mvn clean install ```
 4. Execute a aplicação:
